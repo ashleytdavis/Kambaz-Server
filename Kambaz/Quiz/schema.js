@@ -57,9 +57,10 @@ const schema = new mongoose.Schema(
         availableDate: Date,
         untilDate: Date,
         courseId: String
-    }
+    },
+    { collection: "quizzes" }
 )
-
+export default schema;
 // for availability, we can have this auto change in the db
 // using mongo middleware from what i remember
 // (pretty much equivalent to a mysql trigger)
