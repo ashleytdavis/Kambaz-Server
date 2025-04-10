@@ -56,14 +56,14 @@ const schema = new mongoose.Schema(
         dueDate: Date,
         availableDate: Date,
         untilDate: Date,
-        courseId: String
+        courseId: { type: String, ref: "CourseModel" },
+        questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "QuizQuestion" }]
     },
     { collection: "quizzes" }
 )
 export default schema;
-// for availability, we can have this auto change in the db
-// using mongo middleware from what i remember
-// (pretty much equivalent to a mysql trigger)
 
 // maybe add some mongo middleware to ensure due date is after available date.
 // and does not exceed untilDate
+
+// any time we reference the course or quiz in frontend, we will need to populate the field
