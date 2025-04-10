@@ -56,6 +56,10 @@ const schema = new mongoose.Schema(
         dueDate: Date,
         availableDate: Date,
         untilDate: Date,
+        published: {
+            type: Boolean,
+            default: false
+        },        
         courseId: { type: String, ref: "CourseModel" },
         questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "QuizQuestion" }]
     },
