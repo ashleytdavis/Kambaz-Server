@@ -18,5 +18,5 @@ export function findQuizzesForCourse(courseId) {
     return model.find({ courseId: courseId });
 }
 export function findQuizById(quizId) {
-    return model.find({ _id: quizId });
+    return model.findById(quizId);
 }

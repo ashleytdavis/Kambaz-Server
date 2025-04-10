@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
         _id: String,
-        quizId: { type: String, ref: "CourseModel" },
+        quizId: { type: String, ref: "QuizModel" },
         userId: { type: String, ref: "UserModel" },
         numAttempt: Number
 
