@@ -55,7 +55,8 @@ const schema = new mongoose.Schema(
         },
         dueDate: Date,
         availableDate: Date,
-        untilDate: Date
+        untilDate: Date,
+        courseId: String
     }
 )
 
