@@ -18,5 +18,5 @@ export function findQuizzesForCourse(courseId) {
     return model.find({ courseId: courseId });
 }
 export function findQuizById(quizId) {
-    return model.findById(quizId);
+    return model.findById(quizId).populate("questions");
 }
