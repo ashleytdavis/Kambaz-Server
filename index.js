@@ -9,6 +9,8 @@ import "dotenv/config";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
 import mongoose from "mongoose";
+import QuizAttemptRoutes from "./Kambaz/QuizAttempt/routes.js";
+import QuizQuestionRoutes from "./Kambaz/QuizQuestion/routes.js";
 import QuizRoutes from "./Kambaz/Quiz/routes.js";
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 mongoose.connect(CONNECTION_STRING);
@@ -42,5 +44,7 @@ ModuleRoutes(app);
 AssignmentRoutes(app);
 EnrollmentRoutes(app);
 QuizRoutes(app);
+QuizAttemptRoutes(app);
+QuizQuestionRoutes(app);
 Hello(app);
 app.listen(process.env.PORT || 4000);

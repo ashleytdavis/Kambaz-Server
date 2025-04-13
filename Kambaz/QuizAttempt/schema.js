@@ -8,7 +8,14 @@ const schema = new mongoose.Schema(
         _id: String,
         quizId: { type: String, ref: "QuizModel" },
         userId: { type: String, ref: "UserModel" },
-        numAttempt: Number
+        numAttempt: {type: Number, required: true},
+        score: {type: Number, default: 0},
+        answer: [
+           { questionId: {type: String, required: true},
+            answer: mongoose.Schema.Types.Mixed, // could be string, array, num, etc
+            isCorrect: Boolean}
+        ],
+        submittedAt: {type: Date, default: Date.now }
 
     },
     { collection: "quizAttempts" }

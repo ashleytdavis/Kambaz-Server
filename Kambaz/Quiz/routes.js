@@ -38,7 +38,7 @@ export default function QuizRoutes(app) {
     });
     app.get("/api/quizzes/course/:courseId", async (req, res) => {
         const { courseId } = req.params;
-        const quizzes = quizDao.findQuizzesForCourse(courseId);
+        const quizzes = await quizDao.findQuizzesForCourse(courseId);
         if (!quizzes) {
             res.status(404).send({ message: "This course has no quizzes" });
         } else {
