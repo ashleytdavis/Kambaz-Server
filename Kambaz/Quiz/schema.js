@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
         _id: String,
+        title: String,
         description: String,
         type: {
             type: String,
@@ -49,7 +50,7 @@ const schema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
-        LockQuestions: {
+        lockQuestions: {
             type: Boolean,
             default: false
         },
@@ -59,7 +60,7 @@ const schema = new mongoose.Schema(
         published: {
             type: Boolean,
             default: false
-        },        
+        },
         courseId: { type: String, ref: "CourseModel" },
         questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "QuizQuestion" }]
     },
