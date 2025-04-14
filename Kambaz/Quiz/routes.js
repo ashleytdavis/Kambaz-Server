@@ -23,30 +23,28 @@ export default function QuizRoutes(app) {
     });
 
     app.post("/api/quizzes", async (req, res) => {
-        app.post("/api/quizzes", async (req, res) => {
-            const newQuiz = req.body;
-            try {
-                const createdQuiz = await quizDao.createQuiz(newQuiz);
-                if (newQuiz.questions && Array.isArray(newQuiz.questions)) {
-                    const quizQuestions = await Promise.all(
-                        newQuiz.questions.map(async (question) => {
-                            const quizQuestion = {
-                                ...question,
-                                quiz_id: createdQuiz._id,
-                            };
-                            return await quizQuestionDao.createQuizQuestion(quizQuestion);
-                        })
-                    );
-                    createdQuiz.questions = quizQuestions;
-                }
-
-                res.send(createdQuiz);
-            } catch (error) {
-                console.error("Error creating quiz:", error);
-                res.status(500).send({ message: "Error creating quiz" });
+        const newQuiz = req.body;
+        try {
+            const createdQuiz = await quizDao.createQuiz(newQuiz);
+            if (newQuiz.questions && Array.isArray(newQuiz.questions)) {
+                const quizQuestions = await Promise.all(
+                    newQuiz.questions.map(async (question) => {
+                        const quizQuestion = {
+                            ...question,
+                            quiz_id: createdQuiz._id,
+                        };
+                        return await quizQuestionDao.createQuizQuestion(quizQuestion);
+                    })
+                );
+                createdQuiz.questions = quizQuestions;
             }
-        });
-    })
+
+            res.send(createdQuiz);
+        } catch (error) {
+            console.error("Error creating quiz:", error);
+            res.status(500).send({ message: "Error creating quiz" });
+        }
+    });
 
     app.put("/api/quizzes/:quizId", async (req, res) => {
         const { quizId } = req.params;
