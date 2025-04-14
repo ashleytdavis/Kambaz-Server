@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
         _id: String,
+        title: String,
         description: String,
         type: {
             type: String,
@@ -49,7 +50,7 @@ const schema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
-        LockQuestions: {
+        lockQuestions: {
             type: Boolean,
             default: false
         },
@@ -59,7 +60,7 @@ const schema = new mongoose.Schema(
         published: {
             type: Boolean,
             default: false
-        },        
+        },
         courseId: { type: String, ref: "CourseModel" },
         questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "QuizQuestion" }]
     },
@@ -69,5 +70,14 @@ export default schema;
 
 // maybe add some mongo middleware to ensure due date is after available date.
 // and does not exceed untilDate
+schema.pre("save", function (next) {
+    if (this.dueDate <= this.availableDate) {
+        throw new Error("Due date must be after available date");
+    }
+    if (this.dueDate > this.untilDate) {
+        throw new Error("Due date cannot exceed until date");
+    }
+    next();
+});
 
 // any time we reference the course or quiz in frontend, we will need to populate the field
