@@ -11,7 +11,7 @@ const schema = new mongoose.Schema
                 required: true
             },
             options: { type: [String], default: undefined },
-            correct_answer: String,
+            correct_answer: [String],
             points: { type: Number, default: 1 }
         },
         { collection: "quizQuestions" }
