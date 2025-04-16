@@ -10,7 +10,7 @@ const schema = new mongoose.Schema(
         userId: { type: String, ref: "UserModel" },
         numAttempt: {type: Number, required: true},
         score: {type: Number, default: 0},
-        answer: [
+        answers: [
            { questionId: {type: String, required: true},
             answer: mongoose.Schema.Types.Mixed, // could be string, array, num, etc
             isCorrect: Boolean}
