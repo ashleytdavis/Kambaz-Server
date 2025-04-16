@@ -62,7 +62,7 @@ const schema = new mongoose.Schema(
             default: false
         },
         courseId: { type: String, ref: "CourseModel" },
-        questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "QuizQuestion" }]
+        questions: [{ type: String, ref: "QuizQuestion" }]
     },
     { collection: "quizzes" }
 )
