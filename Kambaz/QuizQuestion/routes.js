@@ -1,11 +1,24 @@
 import * as dao from "./dao.js";
+import quizModel from "../Quiz/model.js";
+import questionModel from "../QuizQuestion/model.js";
 
 export default function QuizQuestionRoutes(app) {
     app.post("/api/quizzes/:quizId/questions", async (req, res) => {
         const { quizId } = req.params;
         const newQuestion = { ...req.body, quiz_id: quizId };
-        const created = await dao.createQuestion(newQuestion);
-        res.send(created);
+
+        try {
+            const createdQuestion = await questionModel.create(newQuestion);
+            const updatedQuiz = await quizModel.findByIdAndUpdate(
+                quizId,
+                { $push: { questions: createdQuestion._id } },
+                { new: true }
+            );
+            res.send(updatedQuiz);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: "Error saving question" });
+        }
     });
 
     app.get("/api/quizzes/:quizId/questions", async (req, res) => {
